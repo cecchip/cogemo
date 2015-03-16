@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+
+        <!-- QWeb Report -->
+
+        <report 
+            id="report_cog_invoice"
+            model="account.invoice"
+            string="CO.GE.MO. Invoice"
+            report_type="qweb-pdf"
+            name="utility_service_invoice.report_cogemo_invoice"
+            file="utility_service_invoice.report_cogemo_invoice"
+            attachment="(object.state in ('open','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')"
+        />
+    </data>
+</openerp>

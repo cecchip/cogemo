@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="report_cogemo_document">
+    <t t-call="report.external_layout">
+        <div class="page">
+			   <div class="row"><div class="col-xs-4"> 
+                    <tr>Tel:<![CDATA[&nbsp;]]><span t-field="o.company_id.phone"/></tr></div></div>
+               <div class="row"><div class="col-xs-4">  
+				   <tr>Fax:<![CDATA[&nbsp;]]><span t-field="o.company_id.fax"/></tr></div></div>
+			  <div class="row"><div class="col-xs-4"> 
+                    <tr>Cod.Fisc/P.Iva:<![CDATA[&nbsp;]]><span t-field="o.company_id.company_registry"/></tr></div></div>
+ 
+              
+              <div class="row"><div class="col-xs-offset-7">
+                    <tr><strong><span t-field="o.partner_id.customer_invoice_name"/></strong></tr></div></div>
+              <div class="row"><div class="col-xs-offset-7">
+                    <tr><span t-field="o.partner_id.invoice_address"/></tr></div></div>
+              <div class="row"><div class="col-xs-offset-7">
+				  	<tr><span t-field="o.partner_id.invoice_zip"/><![CDATA[&nbsp;]]><span t-field="o.partner_id.invoice_city"/></tr></div></div>
+              <div class="row"><div class="col-xs-offset-7">
+                    <tr><br></br></tr></div></div>
+              <div class="row"><div class="col-xs-offset-7">
+				  <tr>Codice:<![CDATA[&nbsp;]]><span t-field="o.partner_id.ref"/></tr></div></div>
+              <div class="row"><div class="col-xs-offset-7">     
+		          <tr>e-mail:<![CDATA[&nbsp;]]><span t-field="o.partner_id.email"/></tr></div></div>
+              <div class="row"><div class="col-xs-offset-7">     
+                    <tr>Cod.Fisc.:<![CDATA[&nbsp;]]><span t-field="o.partner_id.fiscalcode_invoice"/></tr></div></div>
+              <div class="row"><div class="col-xs-offset-7">
+                    <tr><br></br></tr></div></div>      
+
+            <h3>
+                <span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">Fattura n.<![CDATA[&nbsp;]]></span>
+                <span t-if="o.type == 'out_invoice' and o.state == 'proforma2'">PRO-FORMA</span>
+                <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Bozza</span>
+                <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span>
+                <span t-if="o.type == 'out_refund'">Refund</span>
+                <span t-if="o.type == 'in_refund'">Supplier Refund</span>
+                <span t-if="o.type == 'in_invoice'">Supplier Invoice</span>
+                <strong><span t-field="o.number"/></strong>
+                <span t-if="o.date_invoice"/>del<![CDATA[&nbsp;]]><strong><span t-field="o.date_invoice"/></strong>
+            </h3>
+
+            <table class="table table-condensed">
+				<tr><br></br></tr>
+                <tr>
+                     <td><strong>Lettura Finale</strong></td>
+                     <td><strong>Lettura Iniziale</strong></td>
+                     <td><strong>Consumo Finale</strong></td>
+                     <td><strong>Consumo Iniziale</strong></td>
+                     <td><strong>Consumo Totale</strong></td>
+                </tr>          
+                <tr t-foreach="o.reading_ids" t-as="l">
+                     <td><span t-field="l.final_reading_date"/></td>
+                     <td><span t-field="l.start_reading_date"/></td>
+                     <td><span t-field="l.final_consumption"/><![CDATA[&nbsp;]]>mc</td>
+                     <td><span t-field="l.start_consumption"/><![CDATA[&nbsp;]]>mc</td>
+                     <td><span t-field="l.consumption"/><![CDATA[&nbsp;]]>mc</td>
+                </tr>
+
+            </table>
+
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>Descrizione</th>
+                        <th>Quantità</th>
+                        <th class="text-right">Prezzo</th>
+                        <th class="text-right" groups="sale.group_discount_per_so_line">Sconto (%)</th>
+                        <th class="text-right">Aliquota Iva</th>
+                        <th class="text-right">Importo</th>
+                    </tr>
+                </thead>
+                <tbody class="invoice_tbody">
+                    <tr t-foreach="o.invoice_line" t-as="l">
+                        <td><span t-field="l.name"/></td>
+                        <td>
+                            <span t-field="l.quantity"/>
+                            <span t-field="l.uos_id"  groups="product.group_uom"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="l.price_unit"/>
+                        </td>
+                        <td class="text-right" groups="sale.group_discount_per_so_line"><span t-field="l.discount"/></td>
+                        <td class="text-right">
+                            <span t-esc="', '.join(map(lambda x: x.name, l.invoice_line_tax_id))"/>%
+                        </td>
+                        <td class="text-right">
+                            <span t-field="l.price_subtotal"
+                                t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="row">
+                <div class="col-xs-4 pull-right">
+                    <table class="table table-condensed">
+                        <tr class="border-black">
+                            <td><strong>Totale Imponibile</strong></td>
+                            <td class="text-right">
+                                <span t-field="o.amount_untaxed" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Totale Imposta</td>
+                            <td class="text-right">
+                                <span t-field="o.amount_tax" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                            </td>
+                        </tr>
+                        <tr class="border-black">
+                            <td><strong>Totale Fattura</strong></td>
+                            <td class="text-right">
+                                 <span t-field="o.amount_total" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row" t-if="o.tax_line">
+                <div class="col-xs-6">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Riepilogo Iva</th>
+                                <th class="text-right">Imponibile</th>
+                                <th class="text-right">Imposta</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="o.tax_line" t-as="t">
+                                <td><span t-field="t.name"/></td>
+                                <td class="text-right">
+                                    <span t-field="t.base"
+                                        t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="t.amount"
+                                        t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <p t-if="o.comment">
+                <strong>Note:</strong>
+                <span t-field="o.comment"/>
+            </p>
+            <p t-if="o.payment_term.note">
+                <strong>Pagamento:</strong>
+                <span t-field="o.payment_term.note"/>
+            </p>
+            <p><strong>BANCA CR FIRENZE s.p.a. - c/c 100000006314 - ABI 6160 - CAB 02804</strong><br></br>
+               <strong>IBAN: IT13 F 06160 02804 100000006314</strong>         
+            </p>
+            <p><strong>PER CAMBIAMENTO MODALITA' FATTURAZIONE NON VENGONO RIPORTATI I SALDI AL 31.12.2014</strong><br></br>
+               <strong>IL SALDO VERRA' INVIATO CON LA CONVOCAZIONE DI ASSEMBLEA ORDINARIA</strong>         
+            </p>
+
+
+        </div>
+    </t>
+</template>
+
+<template id="report_cogemo_invoice">
+    <t t-call="report.html_container">
+        <t t-foreach="doc_ids" t-as="doc_id">
+            <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'utility_service_invoice.report_cogemo_document')"/>
+        </t>
+    </t>
+</template>
+</data>
+</openerp>

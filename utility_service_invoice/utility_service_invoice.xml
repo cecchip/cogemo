@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+		
+        <!-- Consumption -->
+            <record id="view_consumption_tree" model="ir.ui.view">
+            <field name="name">consumption.tree</field>
+            <field name="model">consumption</field>
+            <field eval="8" name="priority"/>
+            <field name="arch" type="xml">
+                <tree string="Consumption">
+                   <field name="start_consumption"/>
+                   <field name="final_consumption"/>
+                   <field name="start_reading_date"/>
+                   <field name="final_reading_date"/>
+                   <field name="consumption"/>
+                   <field name="account_balance"/>
+                   <field name="consumption_notes"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_consumption_form" model="ir.ui.view">
+            <field name="name">view.consumption.form</field>
+            <field name="model">consumption</field>
+            <field name="arch" type="xml">
+                <form string="Consumption">
+                    <group>
+                       <field name="start_consumption"/>
+                       <field name="final_consumption"/>
+                       <field name="start_reading_date"/>
+                       <field name="final_reading_date"/>
+                       <field name="consumption"/>
+                       <field name="account_balance"/>
+                       <field name="consumption_notes"/>
+                       <field name="invoice_id"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_consumption_form" model="ir.actions.act_window">
+            <field name="name">Consumption</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">consumption</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="menu_consumption" parent="base.menu_base_config" action="action_consumption_form" name="Consumption" sequence="2" groups="base.group_sale_salesman,base.group_sale_manager,base.group_user"/>
+
+        <!-- Utility Service Invoice -->
+        <record model="ir.ui.view" id="view_partner_utility_invoice">
+            <field name="name">res.partner.form.utility.invoice.inheritx</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+					<xpath expr="//page[@string='Internal Notes']" position = "attributes">
+						<attribute name="string">Rilevazione letture</attribute>
+					</xpath>
+				    <page name="internal_notes">
+                    <field name="reading_ids" context="{'default_partner_id':active_id, 'form_view_ref':'view_consumption_form'}">
+						<tree>
+							 <field name="start_reading_date" string="Data lettura"/>
+                             <field name="start_consumption" string="mc rilevati"/>
+							 <field name="final_reading_date" string="data lettura"/>
+                             <field name="final_consumption" string="mc rilevati"/>
+                             <field name="consumption" string="consumo"/>
+                             <field name="invoice_id" string="fattura n."/>
+                             <field name="account_balance" string="saldo contabile"/>
+						</tree>
+                    </field>
+                    </page>
+                <notebook>
+                    <page string="Dati Catastali">
+                        <group colspan="2" col="4">
+                            <field name="sheet"/><field name="particle"/>
+                            <field name="subaltern"/><field name="category"/>
+                            <field name="income"/><field name="notes"/>
+                        </group>
+                    </page>
+                </notebook>
+                <notebook>
+                <page string="Dati Fatturazione">
+                    <group colspan="2" col="4">
+						 <field name="customer_invoice_name"/>
+						 <field name="fiscalcode_invoice" string="Codice Fiscale"/>
+                         <field name="invoice_address"/>
+                         <field name="invoice_zip"/><field name="invoice_city"/>                 
+                    </group>
+                    <group colspan="2" col="4">
+                         <field name="date_subscription" string="Iscrizioni consorzio"/>
+                         <field name="date_of_birth"/><field name="place_of_birth"/>
+                    </group>
+                    <group colspan="2" col="4">
+                         <field name="accounting_code" placeholder="Accounting Code"/>
+                         <field name="counter_code" placeholder="Counter Code"/>
+                    </group>
+                </page>
+                </notebook>
+            </field>
+        </record>
+        
+        <!-- Invoice form -->
+        <record model="ir.ui.view" id="view_consumption_invoice_form_inherit">
+             <field name="name">consumption.invoice.form.inherit</field>
+             <field name="model">account.invoice</field>
+             <field name="inherit_id" ref="account.invoice_form"/>
+             <field name="arch" type="xml">
+                 <data>
+                    <xpath expr="//page[@string='Invoice Lines']/field[@name='comment']" position="after">
+	                    <separator string="Rilevazione Letture" colspan="2"/>
+	                    <field name="reading_ids" context="{'default_partner_id':active_id, 'form_view_ref':'view_consumption_form'}">
+  	                         <tree>
+							 <field name="start_reading_date" string="Data lettura"/>
+                             <field name="start_consumption" string="mc rilevati"/>
+							 <field name="final_reading_date" string="data lettura"/>
+                             <field name="final_consumption" string="mc rilevati"/>
+                             <field name="consumption" string="consumo"/>
+                             <field name="account_balance" string="saldo contabile"/>
+	                         </tree>
+	                    </field>
+                    </xpath>
+                    <xpath expr="//button[@name='invoice_print']" position="replace">
+	                    <button name="invoice_print" string="Print Invoice" type="object" attrs="{'invisible':['|',('sent','=',False), ('state', '!=', 'open')]}" groups="base.group_user"/>
+                    </xpath>
+                 </data>
+             </field>
+        </record> 
+    </data>
+</openerp>

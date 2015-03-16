@@ -1,0 +1,289 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* utility_service_invoice
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-03-15 15:19+0000\n"
+"PO-Revision-Date: 2015-03-15 16:27+0100\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"Language: italiano\n"
+
+#. module: utility_service_invoice
+#: field:consumption,account_balance:0
+msgid "Account Balance"
+msgstr "Saldo"
+
+#. module: utility_service_invoice
+#: view:res.partner:utility_service_invoice.view_partner_utility_invoice
+#: field:res.partner,accounting_code:0
+msgid "Accounting Code"
+msgstr "Codice Consorziato"
+
+#. module: utility_service_invoice
+#: view:website:utility_service_invoice.report_cogemo_document
+msgid "Aliquota Iva"
+msgstr "Aliquota Iva"
+
+#. module: utility_service_invoice
+#: view:website:utility_service_invoice.report_cogemo_document
+msgid "BANCA CR FIRENZE s.p.a. - c/c 100000006314 - ABI 6160 - CAB 02804"
+msgstr "BANCA CR FIRENZE s.p.a. - c/c 100000006314 - ABI 6160 - CAB 02804"
+
+#. module: utility_service_invoice
+#: view:website:utility_service_invoice.report_cogemo_document
+msgid "Bozza"
+msgstr "Bozza"
+
+#. module: utility_service_invoice
+#: model:ir.actions.report.xml,name:utility_service_invoice.report_cog_invoice
+msgid "CO.GE.MO. Invoice"
+msgstr "Fattura Co.GE.MO"
+
+#. module: utility_service_invoice
+#: view:website:utility_service_invoice.report_cogemo_document
+msgid "Cancelled Invoice"
+msgstr "Fattura annullata"
+
+#. module: utility_service_invoice
+#: field:res.partner,category:0
+msgid "Category"
+msgstr "Categoria"
+
+#. module: utility_service_invoice
+#: view:website:utility_service_invoice.report_cogemo_document
+msgid "Consumo Finale"
+msgstr "Consumo Finale"
+
+#. module: utility_service_invoice
+#: view:website:utility_service_invoice.report_cogemo_document
+msgid "Consumo Iniziale"
+msgstr "Consumo Iniziale"
+
+#. module: utility_service_invoice
+#: view:website:utility_service_invoice.report_cogemo_document
+msgid "Consumo Totale"
+msgstr "Consumo Totale"
+
+#. module: utility_service_invoice
+#: view:consumption:utility_service_invoice.view_consumption_form
+#: view:consumption:utility_service_invoice.view_consumption_tree
+#: field:consumption,consumption:0
+#: model:ir.actions.act_window,name:utility_service_invoice.action_consumption_form
+#: model:ir.ui.menu,name:utility_service_invoice.menu_consumption
+msgid "Consumption"
+msgstr "Consumo"
+
+#. module: utility_service_invoice
+#: field:consumption,consumption_notes:0
+msgid "Consumption Notes"
+msgstr "Note Consumo"
+
+#. module: utility_service_invoice
+#: view:account.invoice:utility_service_invoice.view_consumption_invoice_form_inherit
+msgid "Contatori Abbinati"
+msgstr "Contatori Abbinati"
+
+#. module: utility_service_invoice
+#: view:res.partner:utility_service_invoice.view_partner_utility_invoice
+#: field:res.partner,counter_code:0
+msgid "Counter Code"
+msgstr "Codice Contatore"
+
+#. module: utility_service_invoice
+#: field:consumption,create_uid:0
+msgid "Created by"
+msgstr "Creato per"
+
+#. module: utility_service_invoice
+#: field:consumption,create_date:0
+msgid "Created on"
+msgstr "Creato in"
+
+#. module: utility_service_invoice
+#: field:res.partner,customer_invoice_name:0
+msgid "Customer Invoice Name"
+msgstr "Nome Cliente"
+
+#. module: utility_service_invoice
+#: field:res.partner,date_subscription:0
+msgid "Date Subscription"
+msgstr "Data Sottoscrizione"
+
+#. module: utility_service_invoice
+#: field:res.partner,date_of_birth:0
+msgid "Date of Birth"
+msgstr "Data di nascita"
+
+#. module: utility_service_invoice
+#: view:res.partner:utility_service_invoice.view_partner_utility_invoice
+msgid "Dati Catastali"
+msgstr "Dati Catastali"
+
+#. module: utility_service_invoice
+#: view:res.partner:utility_service_invoice.view_partner_utility_invoice
+msgid "Dati Fatturazione"
+msgstr "Dati Fatturazione"
+
+#. module: utility_service_invoice
+#: field:consumption,final_reading_date:0
+msgid "Final Date of Reading"
+msgstr "Data lettura finale"
+
+#. module: utility_service_invoice
+#: field:consumption,final_consumption:0
+msgid "Final consumption"
+msgstr "Consumo Finale"
+
+#. module: utility_service_invoice
+#: field:res.partner,fiscalcode_invoice:0
+msgid "Fiscal Code Invoice"
+msgstr "Codice Fiscale"
+
+#. module: utility_service_invoice
+#: field:consumption,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: utility_service_invoice
+#: view:website:utility_service_invoice.report_cogemo_document
+msgid "Importo"
+msgstr "Importo"
+
+#. module: utility_service_invoice
+#: view:website:utility_service_invoice.report_cogemo_document
+msgid "Imposta"
+msgstr "Imposta"
+
+#. module: utility_service_invoice
+#: field:res.partner,income:0
+msgid "Income"
+msgstr "Reddito"
+
+#. module: utility_service_invoice
+#: model:ir.model,name:utility_service_invoice.model_account_invoice
+msgid "Invoice"
+msgstr "Fattura"
+
+#. module: utility_service_invoice
+#: field:res.partner,invoice_address:0
+msgid "Invoice Address"
+msgstr "Indirizzo di Fatturazione"
+
+#. module: utility_service_invoice
+#: field:res.partner,invoice_city:0
+msgid "Invoice City"
+msgstr "Città"
+
+#. module: utility_service_invoice
+#: field:consumption,invoice_id:0
+msgid "Invoice Rel"
+msgstr "Invoice Rel"
+
+#. module: utility_service_invoice
+#: field:res.partner,invoice_zip:0
+msgid "Invoice Zip"
+msgstr "CAP"
+
+#. module: utility_service_invoice
+#: field:consumption,write_uid:0
+msgid "Last Updated by"
+msgstr "Aggiornato da"
+
+#. module: utility_service_invoice
+#: field:consumption,write_date:0
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento"
+
+#. module: utility_service_invoice
+#: field:res.partner,particle:0
+msgid "Particle"
+msgstr "Particella"
+
+#. module: utility_service_invoice
+#: field:consumption,partner_id:0
+#: model:ir.model,name:utility_service_invoice.model_res_partner
+msgid "Partner"
+msgstr "Cliente"
+
+#. module: utility_service_invoice
+#: field:res.partner,place_of_birth:0
+msgid "Place of Birth"
+msgstr "Luogo di nascita"
+
+#. module: utility_service_invoice
+#: view:website:utility_service_invoice.report_cogemo_document
+msgid "Prezzo"
+msgstr "Prezzo"
+
+#. module: utility_service_invoice
+#: view:website:utility_service_invoice.report_cogemo_document
+msgid "Quantità"
+msgstr "Quantità"
+
+#. module: utility_service_invoice
+#: field:account.invoice,reading_ids:0 field:res.partner,reading_ids:0
+msgid "Reading"
+msgstr "Lettura"
+
+#. module: utility_service_invoice
+#: view:website:utility_service_invoice.report_cogemo_document
+msgid "Refund"
+msgstr "Nota di Credito"
+
+#. module: utility_service_invoice
+#: view:website:utility_service_invoice.report_cogemo_document
+msgid "Riepilogo Iva"
+msgstr "Riepilogo Iva"
+
+#. module: utility_service_invoice
+#: view:account.invoice:utility_service_invoice.view_consumption_invoice_form_inherit
+msgid "Rilevazione Letture"
+msgstr "Rilevazione Letture"
+
+#. module: utility_service_invoice
+#: view:res.partner:utility_service_invoice.view_partner_utility_invoice
+msgid "Rilevazione letture"
+msgstr "Rilevazione letture"
+
+#. module: utility_service_invoice
+#: view:website:utility_service_invoice.report_cogemo_document
+msgid "Sconto (%)"
+msgstr "Sconto (%)"
+
+#. module: utility_service_invoice
+#: field:res.partner,sheet:0
+msgid "Sheet"
+msgstr "Foglio"
+
+#. module: utility_service_invoice
+#: field:consumption,start_reading_date:0
+msgid "Start Date of Reading"
+msgstr "Data lettura iniziale"
+
+#. module: utility_service_invoice
+#: field:consumption,start_consumption:0
+msgid "Start consumption"
+msgstr "Consumo iniziale"
+
+#. module: utility_service_invoice
+#: field:res.partner,subaltern:0
+msgid "Subaltern"
+msgstr "Subalterno"
+
+#. module: utility_service_invoice
+#: view:website:utility_service_invoice.report_cogemo_document
+msgid "Supplier Invoice"
+msgstr "Fattura"
+
+#. module: utility_service_invoice
+#: view:website:utility_service_invoice.report_cogemo_document
+msgid "Supplier Refund"
+msgstr "Note di Credito"
