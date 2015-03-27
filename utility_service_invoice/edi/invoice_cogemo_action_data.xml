@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<openerp>
+    <data>
+        <!-- EDI related Email Templates menu -->
+        <record model="ir.actions.act_window" id="action_email_templates">
+            <field name="name">Email Templates</field>
+            <field name="res_model">email.template</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form,tree</field>
+            <field name="view_id" ref="email_template.email_template_tree" />
+            <field name="search_view_id" ref="email_template.view_email_template_search"/>
+            <field name="context">{'search_default_model_id':'account.invoice'}</field>
+            <field name="context" eval="{'search_default_model_id': ref('account.model_account_invoice')}"/>
+        </record>
+
+    </data>
+
+    <!-- Mail template are declared in a NOUPDATE block
+         so users can freely customize/delete them -->
+    <data noupdate="1">
+        <!--Email template -->
+        <record id="email_template_edi_invoice_cogemo" model="email.template">
+            <field name="name">Fattura Co.Ge.Mo. - Invio Email</field>
+            <field name="email_from">${(object.user_id.email or object.company_id.email or 'noreply@localhost')|safe}</field>
+            <field name="subject">${object.company_id.name|safe}Fattura (Rif ${object.number or 'n/a'})</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="model_id" ref="account.model_account_invoice"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="report_template" ref="report_cog_invoice"/>
+            <field name="report_name">Fattura_CoGeMo_${(object.number or '').replace('/','_')}_${object.state == 'draft' and 'draft' or ''}</field>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="body_html"><![CDATA[
+			
+			<div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+			
+			<p>Consorziato:<span style="font-weight: bold;"> ${object.partner_id.name},</span></p>
+			
+			<p>Fattura Co.Ge.Mo. mese marzo.</p>
+			<p style="border-left: 1px solid #8e0000; margin-left: 30px;"><span style="font-size: 12.222222328186px;">&nbsp;&nbsp;</span><strong style="font-size: 12.222222328186px;">RIFERIMENTI</strong><br style="font-size: 12.222222328186px;"><span style="font-size: 12.222222328186px;">&nbsp;&nbsp;Numero fattura:&nbsp;</span><strong style="font-size: 12.222222328186px;">${object.number}</strong><br style="font-size: 12.222222328186px;"><span style="font-size: 12.222222328186px;">&nbsp;&nbsp;Totale fattura:&nbsp;</span><strong style="font-size: 12.222222328186px;">${object.amount_total}</strong><br style="font-size: 12.222222328186px;"><span style="font-size: 12.222222328186px;">&nbsp;&nbsp;Data fattura:&nbsp;</span><span style="font-size: 12.222222328186px; line-height: 19.0476207733154px; text-align: justify;">&nbsp;</span><span style="font-size: 12.222222328186px; line-height: 19.0476207733154px; text-align: justify; font-weight: bold;">${object.date_invoice}</span></p>
+			<p>Cordiali Saluti.</p><p>Ing. Vittorio Vannucci</p>
+			<br>
+			<div style="width: 375px; margin: 0px; padding: 0px; background-color: #8E0000; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;">
+			<h3 style="margin: 0px; padding: 2px 14px; font-size: 12px; color: #DDD;">
+			<strong style="text-transform:uppercase;">${object.company_id.name}</strong></h3>
+			</div>
+			<div style="width: 347px; margin: 0px; padding: 5px 14px; line-height: 16px; background-color: #F2F2F2;">
+			<span style="color: #222; margin-bottom: 5px; display: block; "><span style="font-size: 12.222222328186px; margin-bottom: 5px; display: block;"><span style="font-size: 12.222222328186px; margin-bottom: 5px; display: block;">${object.company_id.street}</span><span style="font-size: 12.222222328186px; margin-bottom: 5px; display: block;"><span style="font-size: 12.222222328186px;">${object.company_id.street2}</span></span><span style="font-size: 12.222222328186px; margin-bottom: 5px; display: block;"><span style="font-size: 12px;">${object.company_id.zip} ${object.company_id.city}&nbsp;</span></span><div style="font-size: 12.222222328186px; margin: 0px; padding: 0px;">Telefono:&nbsp; ${object.company_id.phone}</div><div style="font-size: 12.222222328186px;">Web :&nbsp;<a href="http://localhost:8089/$%7Bobject.company_id.website%7D">${object.company_id.website}</a></div></span><br></span><p></p>
+			</div>
+			</div>
+            ]]></field>
+        </record>
+    </data>
+</openerp>

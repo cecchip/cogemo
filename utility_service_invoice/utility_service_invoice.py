@@ -90,12 +90,25 @@ class invoice(osv.osv):
         'reading_ids': fields.one2many('consumption', 'invoice_id', 'Reading')
     }
 
-
+    #Override metodo x cambiare bottone "
     def invoice_print(self, cr, uid, ids, context=None):
         """ Print the invoice and mark it as sent, so that we can see more
             easily the next step of the workflow
         """
         assert len(ids) == 1, 'This option should only be used for a single id at a time.'
         return self.pool['report'].get_action(cr, uid, ids, 'utility_service_invoice.report_cogemo_invoice', context=context)
+
+    def action_invoice_sent(self, cr, uid, ids, context=None):
+        '''  Override to use a modified template that includes a invoice signup link '''
+        action_dict = super(invoice, self).action_invoice_sent(cr, uid, ids, context=context)
+        try:
+            template_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'utility_service_invoice', 'email_template_edi_invoice_cogemo')[1]
+            # assume context is still a dict, as prepared by super
+            ctx = action_dict['context']
+            ctx['default_template_id'] = template_id
+            ctx['default_use_template'] = True
+        except Exception:
+            pass
+        return action_dict
 
 invoice()
